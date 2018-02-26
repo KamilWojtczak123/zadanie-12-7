@@ -1,8 +1,9 @@
 var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
 var myHeaders = {
-    'X-Client-Id': 'X-Client-Id',
-    'X-Auth-Token': 'X-Auth-Token'
+    'X-Client-Id': '2989',
+    'X-Auth-Token': '74f2696f134cc86cf93f291c02c2085e'
 };
+
 
 var board = {
 	name: 'Tablica Kanban',
