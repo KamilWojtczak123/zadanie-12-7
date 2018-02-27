@@ -1,15 +1,8 @@
-var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
-var myHeaders = {
-    'X-Client-Id': '2989',
-    'X-Auth-Token': '74f2696f134cc86cf93f291c02c2085e'
-};
-
-
 function Column(id, name) {
-    
+    var self = this;
 	this.id = id;
 	this.name = name || 'No name given';
-}
+	this.$element = createColumn();
 
 	function createColumn() {
 		// TWORZENIE NOWYCH WĘZŁÓW
@@ -28,11 +21,11 @@ function Column(id, name) {
             var cardName = prompt("Enter the name of the card");
 			event.preventDefault();
             $.ajax({
-               url: baseUrl +'/board/',
+               url: baseUrl +'/card',
                 method: 'POST',
                 data: {
                     name: cardName,
-                    bootcamp_kanban_column_id
+                    bootcamp_kanban_column_id: self.id
                 },
                 success: function(response) {
                     var card = new Card(response.id, cardName);
@@ -47,11 +40,12 @@ function Column(id, name) {
 			.append(columnAddCard)
 			.append(columnCardList);
 			return column;
-		}
+	}
+}
 	
 Column.prototype = {
 	createCard: function(card) {
-	  this.element.children('ul').append(card.element);
+	  this.$element.children('ul').append(card.$element);
 	},
 	deleteColumn: function() {
         var self = this;
@@ -59,9 +53,9 @@ Column.prototype = {
             url : baseUrl + '/column/' + self.id,
             method: 'DELETE',
             success: function(response) {
-            self.element.remove();
-        }
-        })
-	  this.element.remove();
+            	self.$element.remove();
+        	}
+        });
+	  	this.$element.remove();
 	}
-}
+};
